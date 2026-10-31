@@ -9,7 +9,6 @@ import {
   Heart,
   Menu,
   ShoppingBag,
-  TicketPercent,
   User,
   X,
 } from "lucide-react";
@@ -27,7 +26,7 @@ type NavItem = {
 const NAV_ITEMS: NavItem[] = [
   { label: "Home", href: "/" },
   {
-    label: "Shop",
+    label: "Books",
     href: "#",
     children: ["New Arrivals", "Best Sellers", "Fiction", "Non-Fiction"],
   },
@@ -47,7 +46,7 @@ const NAV_ITEMS: NavItem[] = [
     href: "#",
     children: ["About Us", "FAQs", "Privacy Policy", "Terms & Conditions"],
   },
-  { label: "Contact Us", href: "#" },
+  
 ];
 
 function AuthButtons({ className = "" }: { className?: string }) {
@@ -172,13 +171,7 @@ export default function Navbar() {
               </li>
             ))}
           </ul>
-          <Link
-            href="#"
-            className="flex items-center gap-2 text-sm font-bold text-white transition-opacity hover:opacity-80"
-          >
-            <TicketPercent className="h-5 w-5" strokeWidth={1.8} />
-            Special Offers
-          </Link>
+          
         </div>
       </nav>
 
@@ -227,14 +220,7 @@ export default function Navbar() {
               </li>
             ))}
             <li className="pt-4">
-              <Link
-                href="#"
-                onClick={() => setMobileOpen(false)}
-                className="flex items-center gap-2 py-2 text-sm font-bold text-white"
-              >
-                <TicketPercent className="h-5 w-5" strokeWidth={1.8} />
-                Special Offers
-              </Link>
+             
             </li>
           </ul>
         </nav>
