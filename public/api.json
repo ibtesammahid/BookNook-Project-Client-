@@ -1,0 +1,273 @@
+
+[
+  {
+    "id": 1,
+    "title": "The Great Gatsby",
+    "author": "F. Scott Fitzgerald",
+    "description": "A story of wealth, love, and the American Dream in the 1920s.",
+    "image": "https://placehold.co/400x600?text=Book+Cover",
+    "quantity": 5,
+    "category": "Fiction"
+  },
+  {
+    "id": 2,
+    "title": "To Kill a Mockingbird",
+    "author": "Harper Lee",
+    "description": "A novel about justice, morality, and racial inequality in the American South.",
+    "image": "https://placehold.co/400x600?text=Book+Cover",
+    "quantity": 4,
+    "category": "Classic"
+  },
+  {
+    "id": 3,
+    "title": "1984",
+    "author": "George Orwell",
+    "description": "A dystopian novel about surveillance, totalitarianism, and individual freedom.",
+    "image": "https://placehold.co/400x600?text=Book+Cover",
+    "quantity": 6,
+    "category": "Science Fiction"
+  },
+  {
+    "id": 4,
+    "title": "Pride and Prejudice",
+    "author": "Jane Austen",
+    "description": "A classic romance exploring love, social class, and personal growth.",
+    "image": "https://placehold.co/400x600?text=Book+Cover",
+    "quantity": 3,
+    "category": "Romance"
+  },
+  {
+    "id": 5,
+    "title": "The Hobbit",
+    "author": "J.R.R. Tolkien",
+    "description": "A hobbit embarks on an unexpected journey to reclaim a lost treasure.",
+    "image": "https://placehold.co/400x600?text=Book+Cover",
+    "quantity": 7,
+    "category": "Fantasy"
+  },
+  {
+    "id": 6,
+    "title": "Harry Potter and the Philosopher's Stone",
+    "author": "J.K. Rowling",
+    "description": "A young wizard discovers his magical heritage and begins his education at Hogwarts.",
+    "image": "https://placehold.co/400x600?text=Book+Cover",
+    "quantity": 8,
+    "category": "Fantasy"
+  },
+  {
+    "id": 7,
+    "title": "The Alchemist",
+    "author": "Paulo Coelho",
+    "description": "A shepherd travels across the desert in search of his personal legend.",
+    "image": "https://placehold.co/400x600?text=Book+Cover",
+    "quantity": 5,
+    "category": "Adventure"
+  },
+  {
+    "id": 8,
+    "title": "The Catcher in the Rye",
+    "author": "J.D. Salinger",
+    "description": "A teenager reflects on identity, adolescence, and the adult world.",
+    "image": "https://placehold.co/400x600?text=Book+Cover",
+    "quantity": 2,
+    "category": "Classic"
+  },
+  {
+    "id": 9,
+    "title": "The Lord of the Rings",
+    "author": "J.R.R. Tolkien",
+    "description": "A fellowship embarks on a dangerous quest to destroy a powerful ring.",
+    "image": "https://placehold.co/400x600?text=Book+Cover",
+    "quantity": 4,
+    "category": "Fantasy"
+  },
+  {
+    "id": 10,
+    "title": "The Da Vinci Code",
+    "author": "Dan Brown",
+    "description": "A symbologist investigates a mysterious murder and a centuries-old secret.",
+    "image": "https://placehold.co/400x600?text=Book+Cover",
+    "quantity": 6,
+    "category": "Mystery"
+  },
+  {
+    "id": 11,
+    "title": "Atomic Habits",
+    "author": "James Clear",
+    "description": "A practical guide to building good habits and breaking bad ones.",
+    "image": "https://placehold.co/400x600?text=Book+Cover",
+    "quantity": 9,
+    "category": "Self-Help"
+  },
+  {
+    "id": 12,
+    "title": "The Psychology of Money",
+    "author": "Morgan Housel",
+    "description": "Explores how behavior and emotions influence financial decisions.",
+    "image": "https://placehold.co/400x600?text=Book+Cover",
+    "quantity": 5,
+    "category": "Finance"
+  },
+  {
+    "id": 13,
+    "title": "Sapiens",
+    "author": "Yuval Noah Harari",
+    "description": "A history of humanity, from ancient civilizations to the modern world.",
+    "image": "https://placehold.co/400x600?text=Book+Cover",
+    "quantity": 4,
+    "category": "History"
+  },
+  {
+    "id": 14,
+    "title": "Educated",
+    "author": "Tara Westover",
+    "description": "A memoir about a woman's journey from an isolated childhood to education.",
+    "image": "https://placehold.co/400x600?text=Book+Cover",
+    "quantity": 3,
+    "category": "Biography"
+  },
+  {
+    "id": 15,
+    "title": "The Silent Patient",
+    "author": "Alex Michaelides",
+    "description": "A psychological thriller about a woman who stops speaking after a murder.",
+    "image": "https://placehold.co/400x600?text=Book+Cover",
+    "quantity": 6,
+    "category": "Thriller"
+  },
+  {
+    "id": 16,
+    "title": "Dune",
+    "author": "Frank Herbert",
+    "description": "A young nobleman navigates politics and survival on a desert planet.",
+    "image": "https://placehold.co/400x600?text=Book+Cover",
+    "quantity": 7,
+    "category": "Science Fiction"
+  },
+  {
+    "id": 17,
+    "title": "The Book Thief",
+    "author": "Markus Zusak",
+    "description": "A young girl finds comfort in books during World War II Germany.",
+    "image": "https://placehold.co/400x600?text=Book+Cover",
+    "quantity": 3,
+    "category": "Historical Fiction"
+  },
+  {
+    "id": 18,
+    "title": "The Fault in Our Stars",
+    "author": "John Green",
+    "description": "Two teenagers with cancer fall in love and explore life's meaning.",
+    "image": "https://placehold.co/400x600?text=Book+Cover",
+    "quantity": 5,
+    "category": "Romance"
+  },
+  {
+    "id": 19,
+    "title": "Murder on the Orient Express",
+    "author": "Agatha Christie",
+    "description": "Detective Hercule Poirot investigates a murder aboard a luxury train.",
+    "image": "https://placehold.co/400x600?text=Book+Cover",
+    "quantity": 4,
+    "category": "Mystery"
+  },
+  {
+    "id": 20,
+    "title": "The Hunger Games",
+    "author": "Suzanne Collins",
+    "description": "A teenager fights for survival in a televised dystopian competition.",
+    "image": "https://placehold.co/400x600?text=Book+Cover",
+    "quantity": 8,
+    "category": "Dystopian"
+  },
+  {
+    "id": 21,
+    "title": "The Little Prince",
+    "author": "Antoine de Saint-Exupery",
+    "description": "A young prince explores different planets and learns about friendship.",
+    "image": "https://placehold.co/400x600?text=Book+Cover",
+    "quantity": 6,
+    "category": "Children"
+  },
+  {
+    "id": 22,
+    "title": "A Brief History of Time",
+    "author": "Stephen Hawking",
+    "description": "An introduction to the universe, black holes, and the nature of time.",
+    "image": "https://placehold.co/400x600?text=Book+Cover",
+    "quantity": 3,
+    "category": "Science"
+  },
+  {
+    "id": 23,
+    "title": "The Kite Runner",
+    "author": "Khaled Hosseini",
+    "description": "A story of friendship, betrayal, and redemption in Afghanistan.",
+    "image": "https://placehold.co/400x600?text=Book+Cover",
+    "quantity": 4,
+    "category": "Fiction"
+  },
+  {
+    "id": 24,
+    "title": "The Midnight Library",
+    "author": "Matt Haig",
+    "description": "A woman explores alternate lives in a library between life and death.",
+    "image": "https://placehold.co/400x600?text=Book+Cover",
+    "quantity": 5,
+    "category": "Fantasy"
+  },
+  {
+    "id": 25,
+    "title": "Think and Grow Rich",
+    "author": "Napoleon Hill",
+    "description": "A classic guide to personal achievement and financial success.",
+    "image": "https://placehold.co/400x600?text=Book+Cover",
+    "quantity": 7,
+    "category": "Self-Help"
+  },
+  {
+    "id": 26,
+    "title": "The 7 Habits of Highly Effective People",
+    "author": "Stephen R. Covey",
+    "description": "A framework for improving personal and professional effectiveness.",
+    "image": "https://placehold.co/400x600?text=Book+Cover",
+    "quantity": 4,
+    "category": "Self-Help"
+  },
+  {
+    "id": 27,
+    "title": "The Martian",
+    "author": "Andy Weir",
+    "description": "An astronaut struggles to survive alone on Mars after being stranded.",
+    "image": "https://placehold.co/400x600?text=Book+Cover",
+    "quantity": 6,
+    "category": "Science Fiction"
+  },
+  {
+    "id": 28,
+    "title": "The Chronicles of Narnia",
+    "author": "C.S. Lewis",
+    "description": "Children discover a magical world filled with adventure and wonder.",
+    "image": "https://placehold.co/400x600?text=Book+Cover",
+    "quantity": 5,
+    "category": "Fantasy"
+  },
+  {
+    "id": 29,
+    "title": "The Girl with the Dragon Tattoo",
+    "author": "Stieg Larsson",
+    "description": "A journalist and a hacker investigate a decades-old disappearance.",
+    "image": "https://placehold.co/400x600?text=Book+Cover",
+    "quantity": 3,
+    "category": "Thriller"
+  },
+  {
+    "id": 30,
+    "title": "The Old Man and the Sea",
+    "author": "Ernest Hemingway",
+    "description": "An aging fisherman struggles against a giant marlin in the sea.",
+    "image": "https://placehold.co/400x600?text=Book+Cover",
+    "quantity": 4,
+    "category": "Classic"
+  }
+]

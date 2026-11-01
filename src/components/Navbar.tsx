@@ -46,6 +46,10 @@ const NAV_ITEMS: NavItem[] = [
     href: "#",
     children: ["About Us", "FAQs", "Privacy Policy", "Terms & Conditions"],
   },
+  {
+    label: "Add Book",
+    href: "/addbooks",
+  }
   
 ];
 
