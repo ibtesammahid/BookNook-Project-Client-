@@ -24,6 +24,7 @@ type ApiBook = {
   description: string;
   category?: string;
   totalCopies: number;
+  image?: string | null;
 };
 
 /**
@@ -60,6 +61,7 @@ async function fetchBook(id: string): Promise<Book | null> {
     id: data._id,
     title: data.title,
     author: data.author,
+    image: data.image,
     description: data.description,
     category: data.category,
     stock: Number(data.totalCopies),
