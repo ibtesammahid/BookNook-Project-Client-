@@ -46,21 +46,13 @@ const NAV_ITEMS: NavItem[] = [
     href: "#",
     children: ["New Arrivals", "Best Sellers", "Fiction", "Non-Fiction"],
   },
-  { label: "Blog", href: "#" },
   {
-    label: "Categories",
+    label: "My Books",
     href: "#",
-    children: ["Fiction", "Self Help", "Children", "Academic"],
   },
   {
-    label: "My Account",
+    label: "My Borrows",
     href: "#",
-    children: ["Orders", "Wishlist", "Settings"],
-  },
-  {
-    label: "Pages",
-    href: "#",
-    children: ["About Us", "FAQs", "Privacy Policy", "Terms & Conditions"],
   },
   {
     label: "Add Book",

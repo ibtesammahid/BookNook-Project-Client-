@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { Minus, Plus } from "lucide-react";
+import { authClient } from "@/lib/auth-client";
 
 type BorrowBookProps = {
   bookId: string;
@@ -16,6 +17,8 @@ export default function BorrowBook({
   userEmail,
   onBorrowed,
 }: BorrowBookProps) {
+    const {data: session} = authClient.useSession();
+    const user = session?.user;
   const [quantity, setQuantity] = useState(1);
   const [isBorrowing, setIsBorrowing] = useState(false);
   const [message, setMessage] = useState("");
@@ -23,12 +26,13 @@ export default function BorrowBook({
   const canIncrease = quantity < stock;
   const canBorrow = stock > 0 && !isBorrowing;
 
-  const handleBorrow = async () => {
+  const handleBorrow = async (e) => {
+    e.preventDefault();
     setMessage("");
     setIsBorrowing(true);
 
     try {
-      const response = await fetch("http://localhost:5000/borrow", {
+      const res = await fetch("http://localhost:5000/borrowedbooks", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -40,9 +44,9 @@ export default function BorrowBook({
         }),
       });
 
-      const data = await response.json();
+      const data = await res.json();
 
-      if (!response.ok) {
+      if (!res.ok) {
         throw new Error(data.message || "Could not borrow this book.");
       }
 
