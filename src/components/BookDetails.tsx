@@ -93,7 +93,7 @@ export default function BookDetails({ id }: { id: string }) {
       </Link>
       <ArrowRight className="h-4 w-4 text-gray-400" />
       <span className="text-gray-900">
-        {loading ? "…" : book?.title ?? "Book"}
+        {loading ? "…" : (book?.title ?? "Book")}
       </span>
     </nav>
   );
@@ -168,6 +168,8 @@ export default function BookDetails({ id }: { id: string }) {
           <div className="mt-6">
             <BorrowBook
               bookId={book.id}
+              bookTitle={book.title}
+              bookImage={book.image}
               stock={book.stock}
               userEmail="" // Pass the signed-in user's email here when auth is connected.
             />

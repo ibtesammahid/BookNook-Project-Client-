@@ -4,8 +4,11 @@ import { useState } from "react";
 import { Minus, Plus } from "lucide-react";
 import { authClient } from "@/lib/auth-client";
 
+
 type BorrowBookProps = {
   bookId: string;
+  bookTitle: string;
+  bookImage?: string | null;
   stock: number;
   userEmail: string;
   onBorrowed?: () => void;
@@ -13,8 +16,9 @@ type BorrowBookProps = {
 
 export default function BorrowBook({
   bookId,
+  bookTitle,
+  bookImage,
   stock,
-  userEmail,
   onBorrowed,
 }: BorrowBookProps) {
     const {data: session} = authClient.useSession();
@@ -26,8 +30,7 @@ export default function BorrowBook({
   const canIncrease = quantity < stock;
   const canBorrow = stock > 0 && !isBorrowing;
 
-  const handleBorrow = async (e) => {
-    e.preventDefault();
+  const handleBorrow = async () => {
     setMessage("");
     setIsBorrowing(true);
 
@@ -39,7 +42,10 @@ export default function BorrowBook({
         },
         body: JSON.stringify({
           bookId,
-          userEmail,
+          bookTitle,
+          bookImage,
+          userName: user?.name,
+          userEmail: user?.email,
           quantity,
         }),
       });

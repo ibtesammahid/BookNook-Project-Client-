@@ -42,9 +42,8 @@ type NavItem = {
 const NAV_ITEMS: NavItem[] = [
   { label: "Home", href: "/" },
   {
-    label: "Books",
-    href: "#",
-    children: ["New Arrivals", "Best Sellers", "Fiction", "Non-Fiction"],
+    label: " All Books",
+    href: "/books"
   },
   {
     label: "My Books",
@@ -52,7 +51,7 @@ const NAV_ITEMS: NavItem[] = [
   },
   {
     label: "My Borrows",
-    href: "#",
+    href: "/my-borrows",
   },
   {
     label: "Add Book",
