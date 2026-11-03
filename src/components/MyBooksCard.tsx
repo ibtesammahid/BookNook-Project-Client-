@@ -74,7 +74,7 @@ const MyBooksCard = ({ books }: { books: AddedBook[] }) => {
           </div>
           <div className="flex gap-2">
           
-          <EditBookDialog />
+          <EditBookDialog book={book} />
           <Button
             className="mt-4 inline-flex items-center gap-1 w-fit rounded-md bg-[#B3372B] px-4 py-2 text-sm font-semibold text-white transition-opacity hover:opacity-90"
           >
