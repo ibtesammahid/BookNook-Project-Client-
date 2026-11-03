@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { redirect } from "next/navigation";
+import BorrowBookDialog from "@/components/BorrowBookDialog";
 
 export type BorrowedBook = {
   _id: string;
@@ -32,14 +32,6 @@ const BorrowBooksCard = ({ books }: BorrowBooksCardProps) => {
     );
   }
 
-  const handleReturn = async() => {
-    const res = await fetch(`http://localhost:5000/my-borrows/${books._id}`, {
-        method: 'DELETE'
-    })
-    const data = await res.json();
-    console.log(data);
-    redirect("/my-borrows");
-  }
 
   return (
     <section className="w-full space-y-4">
@@ -95,14 +87,8 @@ const BorrowBooksCard = ({ books }: BorrowBooksCardProps) => {
 
           {/* Return action */}
           <div className="shrink-0 sm:ml-auto">
-            <button
-              type="button"
-              disabled={book.returned}
-              onClick={handleReturn}
-              className="w-full rounded-md bg-[#B3372B] px-5 py-3 text-sm font-semibold text-white transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:bg-gray-300 sm:w-auto"
-            >
-              {book.returned ? "Returned" : "Return Book"}
-            </button>
+            
+            <BorrowBookDialog book={book} />
           </div>
         </article>
       ))}
