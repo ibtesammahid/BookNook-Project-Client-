@@ -1,4 +1,7 @@
 "use client";
+
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -10,45 +13,70 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
-import { Button } from "@base-ui/react";
-import { redirect } from "next/navigation";
 import { MdOutlineDeleteForever } from "react-icons/md";
+import { Button } from "@base-ui/react";
 
-const DeleteBookDialog = ({ id }: { id: string }) => {
+type DeleteBookDialogProps = {
+  id: string;
+  onDeleted: (id: string) => void;
+};
 
-    const handleDeleteBook = async () => {
-        const res = await fetch (`http://localhost:5000/books/${id}`, {
-            method: "DELETE",
-        })
-        const data = await res.json();
-        redirect("/my-books");
+const DeleteBookDialog = ({ id, onDeleted }: DeleteBookDialogProps) => {
+  const router = useRouter();
+  const [open, setOpen] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  const handleDeleteBook = async () => {
+    setIsDeleting(true);
+
+    try {
+      const res = await fetch(`http://localhost:5000/books/${id}`, {
+        method: "DELETE",
+      });
+
+      if (!res.ok) {
+        throw new Error("Could not delete this book.");
+      }
+
+      setOpen(false);
+      onDeleted(id);
+      router.refresh();
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setIsDeleting(false);
     }
-
-
+  };
 
   return (
-    <AlertDialog>
-      <AlertDialogTrigger render={
-        <Button
-            className="mt-4 inline-flex items-center gap-1 w-fit rounded-md bg-[#B3372B] px-4 py-2 text-sm font-semibold text-white transition-opacity hover:opacity-90"
-          >
-           <MdOutlineDeleteForever /> Delete
+    <AlertDialog open={open} onOpenChange={setOpen}>
+      <AlertDialogTrigger
+        render={
+          <Button className="mt-4 inline-flex w-fit items-center gap-1 rounded-md bg-[#B3372B] px-4 py-2 text-sm font-semibold text-white transition-opacity hover:opacity-90">
+            <MdOutlineDeleteForever />
+            Delete
           </Button>
-      }>
-        Show Dialog
-      </AlertDialogTrigger>
+        }
+      />
+
       <AlertDialogContent>
         <AlertDialogHeader>
           <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
           <AlertDialogDescription>
-            This action cannot be undone. This will permanently delete your
-            account from our servers.
+            This will permanently delete this book. This action cannot be undone.
           </AlertDialogDescription>
         </AlertDialogHeader>
+
         <AlertDialogFooter>
-          <AlertDialogCancel>Cancel</AlertDialogCancel>
-          <AlertDialogAction onClick={handleDeleteBook}>
-            Continue
+          <AlertDialogCancel disabled={isDeleting}>
+            Cancel
+          </AlertDialogCancel>
+          <AlertDialogAction
+            onClick={handleDeleteBook}
+            disabled={isDeleting}
+            className="bg-[#B3372B] text-white hover:bg-[#B3372B] hover:text-white"
+          >
+            {isDeleting ? "Deleting..." : "Delete"}
           </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>

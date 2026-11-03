@@ -3,24 +3,26 @@
 import Image from "next/image";
 import EditBookDialog from "@/components/EditBookDialog";
 import DeleteBookDialog from "@/components/DeleteBookDialog";
+import Link from "next/link";
 export type AddedBook = {
   _id: string;
   title: string;
   author: string;
-  image?: string | null;
-  category?: string;
-  totalCopies?: number;
+  description: string;
+  image: string;
+  category: string;
+  totalCopies: number;
   userEmail: string;
   userName: string;
 };
 
-const MyBooksCard = ({ books }: { books: AddedBook[] }) => {
+const MyBooksCard = ({ books, onBookDeleted }: { books: AddedBook[]; onBookDeleted: (id: string) => void }) => {
   if (books.length === 0) {
     return (
       <section className="w-full rounded-xl border border-gray-200 bg-white px-6 py-12 text-center shadow-sm">
         <h2 className="text-lg font-bold text-[#1F3864]">My Books</h2>
         <p className="mt-2 text-sm text-gray-500">
-          You haven’t added any books yet.
+          You haven&apos;t added any books yet.
         </p>
       </section>
     );
@@ -60,20 +62,22 @@ const MyBooksCard = ({ books }: { books: AddedBook[] }) => {
         </div>
         <div className="flex min-w-0 flex-1 items-center justify-between"> 
         <div className=" min-w-0">
+          <Link key={book._id} href={`/books/${book._id}`} className="hover:underline">
           <h3 className="line-clamp-2 wrap-break-word font-bold text-[#1F3864]">
             {book.title}
           </h3>
+          </Link>
 
           <p className="mt-1 text-sm text-gray-600">{book.author}</p>
 
           <p className="mt-3 wrap-break-word text-xs text-gray-500">
-            Added by: {book.userName || "Unknown"}
+            Added by: {book.userName}
           </p>
           </div>
           <div className="flex gap-2">
           
           <EditBookDialog book={book} />
-          <DeleteBookDialog id={book._id} />
+          <DeleteBookDialog id={book._id} onDeleted={onBookDeleted} />
           </div>
         </div> 
       </article>

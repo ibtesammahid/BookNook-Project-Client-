@@ -31,6 +31,21 @@ const DEFAULT_CATEGORIES = [
   "Non-Fiction",
   "Education",
   "Kids",
+  "Science",
+  "Finance",
+  "History",
+  "Biography",
+  "Technology",
+  "Health & Wellness",
+  "Travel",
+  "Cooking",
+  "Art & Photography",
+  "Poetry",
+  "Comics & Graphic Novels",
+  "Mystery & Thriller",
+  "Romance",
+  "Fantasy & Science Fiction",
+  "Self-Improvement",
   "Self Help",
 ];
 
@@ -92,7 +107,6 @@ export default function AddBookForm() {
   const [copies, setCopies] = useState("");
   const [image, setImage] = useState<File | null>(null);
   const [description, setDescription] = useState("");
-
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [submitting, setSubmitting] = useState(false);
   const [success, setSuccess] = useState(false);

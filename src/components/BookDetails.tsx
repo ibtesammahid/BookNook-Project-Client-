@@ -14,6 +14,7 @@ type Book = {
   image?: string | null;
   description: string;
   category?: string;
+  userName?: string;
   stock: number;
 };
 
@@ -23,6 +24,7 @@ type ApiBook = {
   author: string;
   description: string;
   category?: string;
+  userName?: string;
   totalCopies: number;
   image?: string | null;
 };
@@ -45,6 +47,7 @@ async function fetchBook(id: string): Promise<Book | null> {
     image: data.image,
     description: data.description,
     category: data.category,
+    userName: data.userName,
     stock: Number(data.totalCopies),
   };
 }
@@ -181,6 +184,12 @@ export default function BookDetails({ id }: { id: string }) {
             <p className="text-sm">
               <span className="font-bold text-[#1F3864]">Category:</span>{" "}
               <span className="text-gray-600">{book.category}</span>
+            </p>
+          )}
+          {book.userName && (
+            <p className="text-sm">
+              <span className="font-bold text-[#1F3864]">Added by:</span>{" "}
+              <span className="text-gray-600">{book.userName}</span>
             </p>
           )}
         </div>

@@ -35,6 +35,21 @@ const DEFAULT_CATEGORIES = [
   "Non-Fiction",
   "Education",
   "Kids",
+  "Science",
+  "Finance",
+  "History",
+  "Biography",
+  "Technology",
+  "Health & Wellness",
+  "Travel",
+  "Cooking",
+  "Art & Photography",
+  "Poetry",
+  "Comics & Graphic Novels",
+  "Mystery & Thriller",
+  "Romance",
+  "Fantasy & Science Fiction",
+  "Self-Improvement",
   "Self Help",
 ];
 
@@ -211,7 +226,7 @@ const EditBookDialog = ({ book }: { book: EditBookProps }) => {
     <Dialog>
       <DialogTrigger>
         <Button
-          className="mt-4 inline-flex w-fit items-center gap-1 rounded-md bg-[#B3372B] px-4 py-2 text-sm font-semibold text-white transition-opacity hover:opacity-90"
+          className="mt-4 inline-flex w-fit items-center gap-1 rounded-md border-2  border-[#B3372B] text-[#B3372B] px-4 py-2 text-sm font-semibold transition-opacity hover:opacity-90"
         >
           <MdEdit />
           Edit
