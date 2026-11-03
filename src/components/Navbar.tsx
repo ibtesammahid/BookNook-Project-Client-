@@ -47,7 +47,7 @@ const NAV_ITEMS: NavItem[] = [
   },
   {
     label: "My Books",
-    href: "#",
+    href: "/my-books",
   },
   {
     label: "My Borrows",

@@ -1,7 +1,7 @@
 
 "use client";
 
-import { useRef, useState, type FormEvent } from "react";
+import { useRef, useState,  } from "react";
 import { ImagePlus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -21,8 +21,8 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
-import { useAuth } from "@/lib/auth-context";
 import type { NewBook, AddBookResponse } from "@/Types/type";
+import { authClient } from "@/lib/auth-client";
 
 const MAX_WORDS = 500;
 
@@ -61,7 +61,7 @@ async function uploadImage(image: File): Promise<string> {
   }
 
   return data.imageUrl;
-}
+};
 
 // Send book information to MongoDB through Express.
 async function addBook(book: NewBook): Promise<AddBookResponse> {
@@ -83,8 +83,8 @@ async function addBook(book: NewBook): Promise<AddBookResponse> {
 }
 
 export default function AddBookForm() {
-  const { user } = useAuth();
-
+  const {data: session , isPending} = authClient.useSession();
+  const user = session?.user;
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
   const [category, setCategory] = useState("");
@@ -142,7 +142,7 @@ export default function AddBookForm() {
   };
 
   // Handle form submission.
-  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.SubmitEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     setSuccess(false);
@@ -199,6 +199,8 @@ export default function AddBookForm() {
       setSubmitting(false);
     }
   };
+
+
 
   return (
     <div className="mx-auto max-w-3xl px-6">
@@ -377,7 +379,7 @@ export default function AddBookForm() {
                 <Input
                   id="user-name"
                   readOnly
-                  value={user?.name ?? ""}
+                  value={isPending ? "Getting name..." : user?.name ?? ""}
                   placeholder="Not signed in"
                   className={`${INPUT_CLASS} cursor-not-allowed bg-gray-100 text-gray-600`}
                 />
@@ -391,7 +393,7 @@ export default function AddBookForm() {
                 <Input
                   id="user-email"
                   readOnly
-                  value={user?.email ?? ""}
+                  value={isPending ? "Getting email..." : user?.email ?? ""}
                   placeholder="Not signed in"
                   className={`${INPUT_CLASS} cursor-not-allowed bg-gray-100 text-gray-600`}
                 />
