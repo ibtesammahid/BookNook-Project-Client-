@@ -9,7 +9,6 @@ type BorrowBookProps = {
   bookTitle: string;
   bookImage?: string | null;
   stock: number;
-  userEmail: string;
   onBorrowed?: () => void;
 };
 
@@ -20,54 +19,56 @@ export default function BorrowBook({
   stock,
   onBorrowed,
 }: BorrowBookProps) {
-    const {data: session} = authClient.useSession();
-    const user = session?.user;
+  const { data: session } = authClient.useSession();
+  const user = session?.user;
+
   const [isBorrowing, setIsBorrowing] = useState(false);
   const [message, setMessage] = useState("");
+
   const canBorrow = stock > 0 && !isBorrowing;
 
-const handleBorrow = async (): Promise<boolean> => {
-  setMessage("");
-  setIsBorrowing(true);
+  const handleBorrow = async (): Promise<boolean> => {
+    if (isBorrowing || stock <= 0) return false;
 
-  try {
-    const res = await fetch("http://localhost:5000/borrowedbooks", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        bookId,
-        bookTitle,
-        bookImage,
-        userName: user?.name,
-        userEmail: user?.email,
-        quantity: 1,
-      }),
-    });
+    setMessage("");
+    setIsBorrowing(true);
 
-    const data = await res.json();
+    try {
+      const res = await fetch("http://localhost:5000/borrowedbooks", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          bookId,
+          bookTitle,
+          bookImage,
+          userName: user?.name,
+          quantity: 1,
+        }),
+      });
 
-    if (!res.ok) {
-      throw new Error(data.message || "Could not borrow this book.");
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.message || "Could not borrow this book.");
+      }
+
+      setMessage("Book borrowed successfully!");
+      onBorrowed?.();
+      return true;
+    } catch (error) {
+      setMessage(
+        error instanceof Error ? error.message : "Something went wrong."
+      );
+      return false;
+    } finally {
+      setIsBorrowing(false);
     }
-
-    setMessage("Book borrowed successfully!");
-    onBorrowed?.();
-    return true;
-  } catch (error) {
-    setMessage(
-      error instanceof Error ? error.message : "Something went wrong."
-    );
-    return false;
-  } finally {
-    setIsBorrowing(false);
-  }
-};
+  };
 
   return (
     <div className="flex flex-wrap items-center gap-3">
-
       <BorrowDialog
         userName={user?.name || ""}
         userEmail={user?.email || ""}

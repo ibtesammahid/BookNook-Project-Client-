@@ -5,33 +5,22 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { ArrowRight, BookOpen, ChevronLeft, ChevronRight, Library, Plus } from "lucide-react";
 
-/** Shape expected from the API — `cover` is provided by the API later on. */
 type Book = {
-  id: number | string;
+  _id: string;
   title: string;
   author: string;
-  cover?: string | null;
+  category: string;
+  image?: string | null;
 };
 
-/**
- * TODO(API): replace the body with your own API call. It must resolve to an
- * array of `Book` objects — `title` and `author` are rendered dynamically on
- * each card, and `cover` is the book's cover photo (may be null/omitted).
- *
- * Example:
- *   const res = await fetch("https://your-api.example.com/new-arrivals");
- *   if (!res.ok) throw new Error("Failed to load new arrivals");
- *   const data = await res.json();
- *   return data.map((b) => ({
- *     id: b.id,
- *     title: b.title,
- *     author: b.author,
- *     cover: b.cover,
- *   }));
- */
 async function fetchNewArrivals(): Promise<Book[]> {
-  // Empty placeholder — add your API here.
-  return [];
+  const res = await fetch("http://localhost:5000/new-arrivals");
+
+  if (!res.ok) {
+    throw new Error("Failed to fetch new arrivals");
+  }
+
+  return res.json();
 }
 
 const CARD_WIDTHS =
@@ -59,6 +48,13 @@ export default function NewArrivals() {
       behavior: "smooth",
     });
   };
+
+  useEffect(() => {
+  if (!loading && scrollerRef.current) {
+    scrollerRef.current.scrollLeft = 0;
+    updateScrollButtons();
+  }
+}, [loading, books]);
 
   useEffect(() => {
     let cancelled = false;
@@ -106,20 +102,20 @@ export default function NewArrivals() {
             <div
               key={`skeleton-${i}`}
               aria-hidden="true"
-              className={`aspect-[3/4] shrink-0 animate-pulse rounded-2xl bg-gray-100 ${CARD_WIDTHS}`}
+              className={`aspect-3/4 shrink-0 animate-pulse rounded-2xl bg-gray-100 ${CARD_WIDTHS}`}
             />
           ))}
 
         {books.map((book) => (
           <article
-            key={book.id}
+            key={book._id}
             role="listitem"
-            className={`relative aspect-[3/4] shrink-0 snap-start overflow-hidden rounded-2xl bg-gray-100 ${CARD_WIDTHS}`}
+            className={`relative aspect-3/4 shrink-0 snap-start overflow-hidden rounded-2xl bg-gray-100 ${CARD_WIDTHS}`}
           >
             {/* Cover photo — empty placeholder until the API supplies one */}
-            {book.cover ? (
+            {book.image ? (
               <Image
-                src={book.cover}
+                src={book.image}
                 alt={book.title}
                 fill
                 sizes="(min-width: 1024px) 25vw, (min-width: 768px) 33vw, 78vw"
@@ -132,7 +128,7 @@ export default function NewArrivals() {
             )}
 
             {/* Title overlay */}
-            <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/85 via-black/45 to-transparent p-5 pt-16">
+            <div className="absolute inset-x-0 bottom-0 bg-linear-to-t from-black/85 via-black/45 to-transparent p-5 pt-16">
               <h3 className="text-lg font-bold text-white">{book.title}</h3>
               <p className="mt-1 text-sm text-white/85">By {book.author}</p>
             </div>
@@ -141,16 +137,16 @@ export default function NewArrivals() {
 
         {/* Trailing "More Books" card */}
         <Link
-          href="/recently-added"
+          href="/books"
           role="listitem"
-          className={`group flex aspect-[3/4] shrink-0 snap-start flex-col items-center justify-center gap-3 rounded-2xl border-2 border-dashed border-[#1F3864]/30 bg-[#1F3864]/5 px-6 text-center transition-colors hover:border-[#B3372B] hover:bg-[#B3372B]/5 ${CARD_WIDTHS}`}
+          className={`group flex aspect-3/4 shrink-0 snap-start flex-col items-center justify-center gap-3 rounded-2xl border-2 border-dashed border-[#1F3864]/30 bg-[#1F3864]/5 px-6 text-center transition-colors hover:border-[#B3372B] hover:bg-[#B3372B]/5 ${CARD_WIDTHS}`}
         >
           <span className="flex h-12 w-12 items-center justify-center rounded-full bg-[#B3372B] text-white">
             <Plus className="h-6 w-6" />
           </span>
           <span className="text-lg font-bold text-[#1F3864]">More Books</span>
           <span className="flex items-center gap-1 text-sm text-gray-500 group-hover:text-[#B3372B]">
-            Recently added
+            See All Books
             <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
           </span>
         </Link>

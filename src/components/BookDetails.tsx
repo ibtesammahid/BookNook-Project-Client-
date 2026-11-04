@@ -174,7 +174,6 @@ export default function BookDetails({ id }: { id: string }) {
               bookTitle={book.title}
               bookImage={book.image}
               stock={book.stock}
-              userEmail="" // Pass the signed-in user's email here when auth is connected.
             />
           </div>
 
