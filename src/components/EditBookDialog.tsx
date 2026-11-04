@@ -27,6 +27,7 @@ import {
 import { Textarea } from "@/components/ui/textarea";
 import { useRef, useState } from "react";
 import { authClient } from "@/lib/auth-client";
+import { apiFetch } from "@/lib/api";
 
 const MAX_WORDS = 500;
 
@@ -82,7 +83,7 @@ async function uploadImage(image: File): Promise<string> {
   const formData = new FormData();
   formData.append("image", image);
 
-  const res = await fetch("http://localhost:5000/upload-image", {
+  const res = await apiFetch("/upload-image", {
     method: "POST",
     body: formData,
   });
@@ -101,7 +102,7 @@ async function updateBook(
     id: string,
   book: Partial<NewBook>
 ) {
-  const res = await fetch(`http://localhost:5000/books/${id}`, {
+  const res = await apiFetch(`/books/${id}`, {
     method: "PATCH",
     headers: {
       "Content-Type": "application/json",

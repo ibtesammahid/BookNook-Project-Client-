@@ -2,26 +2,15 @@
 
 import { useEffect, useState } from "react";
 import { authClient } from "@/lib/auth-client";
+import { apiFetch } from "@/lib/api";
 import MyBooksCard from "@/components/MyBooksCard";
-
-type Book = {
-  _id: string;
-  title: string;
-  author: string;
-  description: string;
-  category: string;
-  userEmail: string;
-  userName: string;
-  // Add other fields required by MyBooksCard
-};
-
-
+import type { AddedBook } from "@/components/MyBooksCard";
 
 export default function MyBooksPage() {
   const { data: session, isPending } = authClient.useSession();
   const email = session?.user?.email;
 
-  const [books, setBooks] = useState<Book[]>([]);
+  const [books, setBooks] = useState<AddedBook[]>([]);
   const [loading, setLoading] = useState(true);
 
  useEffect(() => {
@@ -31,14 +20,14 @@ export default function MyBooksPage() {
     setLoading(true);
 
     try {
-      const res = await fetch(
-        `http://localhost:5000/my-books/${encodeURIComponent(email)}`,
+      const res = await apiFetch(
+        `/my-books/${encodeURIComponent(email)}`,
         { cache: "no-store" },
       );
 
       if (!res.ok) throw new Error("Could not fetch your books.");
 
-      const data: Book[] = await res.json();
+      const data: AddedBook[] = await res.json();
       setBooks(data);
     } catch (error) {
       console.error("Error loading my books:", error);

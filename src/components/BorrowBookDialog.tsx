@@ -1,3 +1,5 @@
+"use client";
+
 import {
   AlertDialog,
   AlertDialogAction,
@@ -9,20 +11,21 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
-import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { BorrowedBook } from "./BorrowBooksCard";
+import { apiFetch } from "@/lib/api";
 
 const BorrowBookDialog = ({ book }: { book: BorrowedBook }) => {
+  const router = useRouter();
 
-    
-  const handleReturn = async() => {
-    const res = await fetch(`http://localhost:5000/my-borrows/${book._id}`, {
-        method: 'DELETE'
-    })
+  const handleReturn = async () => {
+    const res = await apiFetch(`/my-borrows/${book._id}`, {
+      method: "DELETE",
+    });
     const data = await res.json();
     console.log(data);
-    redirect("/my-borrows");
-  }
+    router.refresh();
+  };
 
   return (
     <AlertDialog>

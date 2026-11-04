@@ -23,6 +23,7 @@ import {
 import { Textarea } from "@/components/ui/textarea";
 import type { NewBook, AddBookResponse } from "@/Types/type";
 import { authClient } from "@/lib/auth-client";
+import { apiFetch } from "@/lib/api";
 
 const MAX_WORDS = 500;
 
@@ -64,7 +65,7 @@ async function uploadImage(image: File): Promise<string> {
   const formData = new FormData();
   formData.append("image", image);
 
-  const res = await fetch("http://localhost:5000/upload-image", {
+  const res = await apiFetch("/upload-image", {
     method: "POST",
     body: formData,
   });
@@ -80,7 +81,7 @@ async function uploadImage(image: File): Promise<string> {
 
 // Send book information to MongoDB through Express.
 async function addBook(book: NewBook): Promise<AddBookResponse> {
-  const res = await fetch("http://localhost:5000/addbooks", {
+  const res = await apiFetch("/addbooks", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

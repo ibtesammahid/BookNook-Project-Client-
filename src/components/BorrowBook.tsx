@@ -1,7 +1,9 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { authClient } from "@/lib/auth-client";
+import { apiFetch } from "@/lib/api";
 import BorrowDialog from "@/components/BorrowDialog";
 
 type BorrowBookProps = {
@@ -30,11 +32,16 @@ export default function BorrowBook({
   const handleBorrow = async (): Promise<boolean> => {
     if (isBorrowing || stock <= 0) return false;
 
+    if (!user) {
+      setMessage("Please sign in to borrow this book.");
+      return false;
+    }
+
     setMessage("");
     setIsBorrowing(true);
 
     try {
-      const res = await fetch("http://localhost:5000/borrowedbooks", {
+      const res = await apiFetch("/borrowedbooks", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -43,7 +50,7 @@ export default function BorrowBook({
           bookId,
           bookTitle,
           bookImage,
-          userName: user?.name,
+          userName: user.name,
           quantity: 1,
         }),
       });
@@ -80,6 +87,18 @@ export default function BorrowBook({
       {message && (
         <p role="status" className="w-full text-sm text-green-600">
           {message}
+        </p>
+      )}
+
+      {!user && (
+        <p className="w-full text-sm text-gray-600">
+          <Link
+            href="/loginreminder"
+            className="font-semibold text-[#8C2B22] underline underline-offset-4"
+          >
+            Sign in
+          </Link>{" "}
+          to borrow this book.
         </p>
       )}
     </div>

@@ -28,5 +28,6 @@ export default function BookDetailsPage({ params }: PageProps) {
 
 async function BookDetailsContent({ params }: PageProps) {
   const { id } = await params;
-  return <BookDetails id={id} />;
+  // key forces a remount per book, so loading/error state resets on id change.
+  return <BookDetails key={id} id={id} />;
 }

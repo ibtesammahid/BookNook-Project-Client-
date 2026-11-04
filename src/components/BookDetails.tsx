@@ -60,9 +60,6 @@ export default function BookDetails({ id }: { id: string }) {
   useEffect(() => {
     let cancelled = false;
 
-    setLoading(true);
-    setError("");
-
     fetchBook(id)
       .then((data) => {
         if (cancelled) return;

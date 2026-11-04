@@ -8,7 +8,18 @@ const MyBorrowsPage = async () => {
   });
   const user = session?.user;
 
-  const res = await fetch(`http://localhost:5000/my-borrows/${user?.email}`);
+  const jwtToken = await auth.api.getToken({
+    headers: await headers(),
+  });
+
+  const res = await fetch(
+    `http://localhost:5000/my-borrows/${encodeURIComponent(user?.email ?? "")}`,
+    {
+      headers: jwtToken?.token
+        ? { Authorization: `Bearer ${jwtToken.token}` }
+        : undefined,
+    },
+  );
   const borrowedBooks = await res.json();
   console.log(borrowedBooks);
 

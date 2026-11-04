@@ -15,6 +15,7 @@ import {
 } from "@/components/ui/alert-dialog";
 import { MdOutlineDeleteForever } from "react-icons/md";
 import { Button } from "@base-ui/react";
+import { apiFetch } from "@/lib/api";
 
 type DeleteBookDialogProps = {
   id: string;
@@ -30,7 +31,7 @@ const DeleteBookDialog = ({ id, onDeleted }: DeleteBookDialogProps) => {
     setIsDeleting(true);
 
     try {
-      const res = await fetch(`http://localhost:5000/books/${id}`, {
+      const res = await apiFetch(`/books/${id}`, {
         method: "DELETE",
       });
 
