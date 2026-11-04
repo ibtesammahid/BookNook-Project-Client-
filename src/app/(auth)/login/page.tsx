@@ -54,9 +54,11 @@ export default function LoginPage() {
 
   return (
     <div className="flex flex-col gap-6">
-      <Card>
+      <Card className="border shadow-sm ring-0">
         <CardHeader className="text-center">
-          <CardTitle className="text-xl">Welcome back</CardTitle>
+          <CardTitle className="text-xl font-bold text-[#1F3864]">
+            Welcome back
+          </CardTitle>
           <CardDescription>
             Login with your Google account
           </CardDescription>
@@ -68,7 +70,7 @@ export default function LoginPage() {
             <button
               onClick={handleGoogleSignUp}
               type="button"
-              className="flex min-h-11 min-w-0 items-center justify-center gap-2 rounded-lg border border-[#E5E5E5] bg-white px-3 py-2.5 text-xs font-medium text-gray-800 transition hover:bg-gray-50 hover:shadow-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#05893E] sm:text-sm"
+              className="flex min-h-11 min-w-0 items-center justify-center gap-2 rounded-lg border border-[#E5E5E5] bg-white px-3 py-2.5 text-xs font-medium text-gray-800 transition hover:bg-gray-50 hover:shadow-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#8C2B22] sm:text-sm"
             >
               <svg
                 aria-label="Google logo"
@@ -103,7 +105,9 @@ export default function LoginPage() {
                 Or continue with
               </FieldSeparator>
               <Field>
-                <FieldLabel htmlFor="email">Email</FieldLabel>
+                <FieldLabel htmlFor="email" className="font-semibold text-[#1F3864]">
+                  Email
+                </FieldLabel>
                 <Input
                   id="email"
                   type="email"
@@ -114,10 +118,12 @@ export default function LoginPage() {
               </Field>
               <Field>
                 <div className="flex items-center">
-                  <FieldLabel htmlFor="password">Password</FieldLabel>
+                  <FieldLabel htmlFor="password" className="font-semibold text-[#1F3864]">
+                    Password
+                  </FieldLabel>
                   <a
                     href="#"
-                    className="ml-auto text-sm underline-offset-4 hover:underline"
+                    className="ml-auto text-sm font-medium text-[#8C2B22] underline-offset-4 hover:underline"
                   >
                     Forgot your password?
                   </a>
@@ -125,9 +131,17 @@ export default function LoginPage() {
                 <Input id="password" type="password" name="password" required />
               </Field>
               <Field>
-                <Button type="submit">Login</Button>
+                <Button
+                  type="submit"
+                  className="h-11 rounded-md bg-[#8C2B22] text-sm font-semibold text-white hover:bg-[#B3372B]/90"
+                >
+                  Login
+                </Button>
                 <FieldDescription className="text-center">
-                  Don&apos;t have an account? <Link href="/register">Sign up</Link>
+                  Don&apos;t have an account?{" "}
+                  <Link href="/register" className="font-semibold text-[#8C2B22]">
+                    Sign up
+                  </Link>
                 </FieldDescription>
               </Field>
             </FieldGroup>
@@ -135,8 +149,15 @@ export default function LoginPage() {
         </CardContent>
       </Card>
       <FieldDescription className="px-6 text-center">
-        By clicking continue, you agree to our <a href="#">Terms of Service</a>{" "}
-        and <a href="#">Privacy Policy</a>.
+        By clicking continue, you agree to our{" "}
+        <a href="#" className="font-medium text-[#8C2B22] underline underline-offset-4">
+          Terms of Service
+        </a>{" "}
+        and{" "}
+        <a href="#" className="font-medium text-[#8C2B22] underline underline-offset-4">
+          Privacy Policy
+        </a>
+        .
       </FieldDescription>
     </div>
   )

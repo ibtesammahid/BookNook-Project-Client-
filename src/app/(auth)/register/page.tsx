@@ -52,28 +52,23 @@ export default function RegisterPage() {
 
   return (
     <div className="flex flex-col gap-6">
-      <Card>
+      <Card className="border shadow-sm ring-0">
         <CardHeader className="text-center">
-          <CardTitle className="text-xl">Create an account</CardTitle>
+          <CardTitle className="text-xl font-bold text-[#1F3864]">
+            Create an account
+          </CardTitle>
           <CardDescription>
             Register with Google to get started with BookNook
           </CardDescription>
-
-
-
-
-          
         </CardHeader>
-
         <CardContent>
           <form onSubmit={handleEmailRegister}>
             <FieldGroup>
               <Field>
-
                  <button
               onClick={handleGoogleSignUp}
               type="button"
-              className="flex min-h-11 min-w-0 items-center justify-center gap-2 rounded-lg border border-[#E5E5E5] bg-white px-3 py-2.5 text-xs font-medium text-gray-800 transition hover:bg-gray-50 hover:shadow-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#05893E] sm:text-sm"
+              className="flex min-h-11 min-w-0 items-center justify-center gap-2 rounded-lg border border-[#E5E5E5] bg-white px-3 py-2.5 text-xs font-medium text-gray-800 transition hover:bg-gray-50 hover:shadow-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#8C2B22] sm:text-sm"
             >
               <svg
                 aria-label="Google logo"
@@ -111,7 +106,12 @@ export default function RegisterPage() {
               <CardDescription>
             Enter your information to register for BookNook
           </CardDescription>
-                <FieldLabel htmlFor="name">Name</FieldLabel>
+                <FieldLabel
+                  htmlFor="name"
+                  className="font-semibold text-[#1F3864]"
+                >
+                  Name
+                </FieldLabel>
                 <Input
                   id="name"
                   name="name"
@@ -123,7 +123,12 @@ export default function RegisterPage() {
               </Field>
 
               <Field>
-                <FieldLabel htmlFor="email">Email</FieldLabel>
+                <FieldLabel
+                  htmlFor="email"
+                  className="font-semibold text-[#1F3864]"
+                >
+                  Email
+                </FieldLabel>
                 <Input
                   id="email"
                   name="email"
@@ -135,7 +140,12 @@ export default function RegisterPage() {
               </Field>
 
               <Field>
-                <FieldLabel htmlFor="photoUrl">Photo URL</FieldLabel>
+                <FieldLabel
+                  htmlFor="photoUrl"
+                  className="font-semibold text-[#1F3864]"
+                >
+                  Photo URL
+                </FieldLabel>
                 <Input
                   id="photoUrl"
                   name="photoUrl"
@@ -145,7 +155,12 @@ export default function RegisterPage() {
               </Field>
 
               <Field>
-                <FieldLabel htmlFor="password">Password</FieldLabel>
+                <FieldLabel
+                  htmlFor="password"
+                  className="font-semibold text-[#1F3864]"
+                >
+                  Password
+                </FieldLabel>
                 <Input
                   id="password"
                   name="password"
@@ -161,10 +176,18 @@ export default function RegisterPage() {
               </Field>
 
               <Field>
-                <Button type="submit">Register</Button>
+                <Button
+                  type="submit"
+                  className="h-11 rounded-md bg-[#8C2B22] text-sm font-semibold text-white hover:bg-[#B3372B]/90"
+                >
+                  Register
+                </Button>
                 <FieldDescription className="text-center">
                   Already have an account?{" "}
-                  <Link href="/login" className="underline underline-offset-4">
+                  <Link
+                    href="/login"
+                    className="font-semibold text-[#8C2B22] underline underline-offset-4"
+                  >
                     Login
                   </Link>
                 </FieldDescription>
@@ -176,11 +199,17 @@ export default function RegisterPage() {
 
       <FieldDescription className="px-6 text-center">
         By registering, you agree to our{" "}
-        <Link href="/terms" className="underline underline-offset-4">
+        <Link
+          href="/terms"
+          className="font-medium text-[#8C2B22] underline underline-offset-4"
+        >
           Terms of Service
         </Link>{" "}
         and{" "}
-        <Link href="/privacy" className="underline underline-offset-4">
+        <Link
+          href="/privacy"
+          className="font-medium text-[#8C2B22] underline underline-offset-4"
+        >
           Privacy Policy
         </Link>
         .

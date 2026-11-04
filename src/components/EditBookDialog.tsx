@@ -121,7 +121,7 @@ async function updateBook(
 const EditBookDialog = ({ book }: { book: EditBookProps }) => {
   const { data: session, isPending } = authClient.useSession();
   const user = session?.user;
-
+  const [open, setOpen] = useState(false);
   const [title, setTitle] = useState(book.title);
   const [author, setAuthor] = useState(book.author);
   const [category, setCategory] = useState(book.category);
@@ -208,6 +208,7 @@ const EditBookDialog = ({ book }: { book: EditBookProps }) => {
 
       setSuccess(true);
       setErrors({});
+      setOpen(false);
     } catch (error) {
       console.error("Failed to update book:", error);
 
@@ -223,7 +224,7 @@ const EditBookDialog = ({ book }: { book: EditBookProps }) => {
   };
 
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger>
         <Button
           className="mt-4 inline-flex w-fit items-center gap-1 rounded-md border-2  border-[#B3372B] text-[#B3372B] px-4 py-2 text-sm font-semibold transition-opacity hover:opacity-90"
@@ -241,7 +242,6 @@ const EditBookDialog = ({ book }: { book: EditBookProps }) => {
             Update the information of your book.
           </DialogDescription>
         </DialogHeader>
-
         <form
           onSubmit={handleSubmit}
           className="grid gap-5"
