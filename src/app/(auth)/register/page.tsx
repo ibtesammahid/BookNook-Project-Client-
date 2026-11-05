@@ -18,6 +18,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { authClient } from "@/lib/auth-client";
 import { redirect } from "next/navigation";
+import { toast } from "@/components/ui/toast"
 
 export default function RegisterPage() {
     const handleEmailRegister = async (event: React.SubmitEvent<HTMLFormElement>) => {
@@ -31,11 +32,20 @@ export default function RegisterPage() {
         })
 
         if (data){
-            console.log(data);
+            toast.add({
+                title: "Success",
+                type: "success",
+                description: "Registration successful!",
+            });
             redirect("/login")
         }
         if (error){
             console.error(error);
+            toast.add({
+                title: "Error",
+                type: "error",
+                description: error.message || "Registration failed.",
+            });
         }
     }
 
@@ -47,6 +57,11 @@ export default function RegisterPage() {
     
         if (error) {
           alert(error.message ?? "Sign In failed");
+          toast.add({
+            title: "Error",
+            type: "error",
+            description: error.message || "Sign In failed.",
+          });
         }
       };
 

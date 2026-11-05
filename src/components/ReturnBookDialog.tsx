@@ -14,17 +14,41 @@ import {
 import { useRouter } from "next/navigation";
 import { BorrowedBook } from "./BorrowBooksCard";
 import { apiFetch } from "@/lib/api";
+import { toast } from "@/components/ui/toast"
 
 const BorrowBookDialog = ({ book }: { book: BorrowedBook }) => {
   const router = useRouter();
 
   const handleReturn = async () => {
-    const res = await apiFetch(`/my-borrows/${book._id}`, {
-      method: "DELETE",
-    });
-    const data = await res.json();
-    console.log(data);
-    router.refresh();
+    try {
+      const res = await apiFetch(`/my-borrows/${book._id}`, {
+        method: "DELETE",
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        toast.add({
+          title: "Error",
+          type: "error",
+          description: data.message || "Could not return this book.",
+        });
+        return;
+      }
+
+      toast.add({
+        title: "Success",
+        type: "success",
+        description: "Book returned successfully!",
+      });
+
+      router.refresh();
+    } catch (error) {
+      toast.add({
+        title: "Error",
+        type: "error",
+        description:
+          error instanceof Error ? error.message : "Something went wrong.",
+      });
+    }
   };
 
   return (

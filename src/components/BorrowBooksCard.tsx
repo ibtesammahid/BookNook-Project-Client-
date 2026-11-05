@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import BorrowBookDialog from "@/components/BorrowBookDialog";
+import BorrowBookDialog from "@/components/ReturnBookDialog";
 import Link from "next/link";
 
 export type BorrowedBook = {

@@ -24,6 +24,7 @@ import { Textarea } from "@/components/ui/textarea";
 import type { NewBook, AddBookResponse } from "@/Types/type";
 import { authClient } from "@/lib/auth-client";
 import { apiFetch } from "@/lib/api";
+import { toast } from "@/components/ui/toast";
 
 const MAX_WORDS = 500;
 
@@ -202,6 +203,11 @@ export default function AddBookForm() {
       }
 
       setSuccess(true);
+      toast.add({
+        title: "Success",
+        type: "success",
+        description: "Book added successfully!",
+      });
     } catch (error) {
       console.error("Failed to add book:", error);
 

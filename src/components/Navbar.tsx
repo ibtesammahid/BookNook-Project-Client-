@@ -65,21 +65,6 @@ const NAV_ITEMS: NavItem[] = [
 // ==========================================
 
 function AuthButtons({ className = "" }: { className?: string }) {
-  // const [googleError, setGoogleError] = useState("");
-
-  // // Handle Google authentication
-  // const handleGoogleLogin = async () => {
-  //   setGoogleError("");
-
-  //   const { error } = await authClient.signIn.social({
-  //     provider: "google",
-  //     callbackURL: "/",
-  //   });
-
-  //   if (error) {
-  //     setGoogleError(error.message || "Google login failed.");
-  //   }
-  // };
 
   return (
     <div className={`flex flex-col items-end gap-1 ${className}`}>

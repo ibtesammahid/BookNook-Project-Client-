@@ -28,6 +28,12 @@ import { Textarea } from "@/components/ui/textarea";
 import { useRef, useState } from "react";
 import { authClient } from "@/lib/auth-client";
 import { apiFetch } from "@/lib/api";
+import { toast } from "@/components/ui/toast"
+
+
+
+
+
 
 const MAX_WORDS = 500;
 
@@ -129,14 +135,12 @@ const EditBookDialog = ({ book }: { book: EditBookProps }) => {
   const [copies, setCopies] = useState(String(book.totalCopies));
   const [image, setImage] = useState<File | null>(null);
   const [description, setDescription] = useState(book.description);
-
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [submitting, setSubmitting] = useState(false);
   const [success, setSuccess] = useState(false);
-
   const fileInputRef = useRef<HTMLInputElement>(null);
-
   const wordCount = countWords(description);
+
 
   // Validate all fields before submission.
   const validate = () => {
@@ -177,7 +181,7 @@ const EditBookDialog = ({ book }: { book: EditBookProps }) => {
 
   // Handle form submission.
   const handleSubmit = async (
-    event: React.FormEvent<HTMLFormElement>
+    event: React.SubmitEvent<HTMLFormElement>
   ) => {
     event.preventDefault();
 
@@ -209,6 +213,11 @@ const EditBookDialog = ({ book }: { book: EditBookProps }) => {
 
       setSuccess(true);
       setErrors({});
+      toast.add({
+        title: "Success",
+        type: "success",
+        description: "Book updated successfully!",
+      });
       setOpen(false);
     } catch (error) {
       console.error("Failed to update book:", error);

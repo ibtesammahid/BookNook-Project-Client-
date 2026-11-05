@@ -16,6 +16,7 @@ import {
 import { MdOutlineDeleteForever } from "react-icons/md";
 import { Button } from "@base-ui/react";
 import { apiFetch } from "@/lib/api";
+import { toast } from "@/components/ui/toast"
 
 type DeleteBookDialogProps = {
   id: string;
@@ -42,6 +43,11 @@ const DeleteBookDialog = ({ id, onDeleted }: DeleteBookDialogProps) => {
       setOpen(false);
       onDeleted(id);
       router.refresh();
+      toast.add({
+        title: "Success",
+        type: "success",
+        description: "Book deleted successfully!",
+      });
     } catch (error) {
       console.error(error);
     } finally {

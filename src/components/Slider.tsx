@@ -13,7 +13,7 @@ import bannerUgur from "@/assets/banner/ugur-akdemir-XT-o5O458as-unsplash.jpg";
 import bannerWill from "@/assets/banner/will-van-wingerden-dsvJgiBJTOs-unsplash.jpg";
 
 /** Red sampled from the reference banner (eyebrow text + button). */
-const ACCENT = "#B3372B";
+const ACCENT = "#8c2b22";
 /** Navy heading color from the reference banner. */
 const HEADING = "#1F3864";
 
@@ -115,7 +115,7 @@ export default function Slider() {
               className="object-cover object-center"
             />
             {/* Light overlay so the copy stays readable over any photo */}
-            <div className="absolute inset-0 bg-gradient-to-r from-[#EDEBE6] via-[#EDEBE6]/90 to-[#EDEBE6]/20 md:via-[#EDEBE6]/80 md:to-transparent" />
+            <div className="absolute inset-0 bg-linear-to-r from-[#EDEBE6] via-[#EDEBE6]/90 to-[#EDEBE6]/20 md:via-[#EDEBE6]/80 md:to-transparent" />
 
             {/* Copy — matches the reference banner */}
             <div className="relative z-10 mx-auto flex h-full max-w-7xl items-center px-6">

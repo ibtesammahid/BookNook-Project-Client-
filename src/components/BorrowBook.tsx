@@ -5,6 +5,7 @@ import Link from "next/link";
 import { authClient } from "@/lib/auth-client";
 import { apiFetch } from "@/lib/api";
 import BorrowDialog from "@/components/BorrowDialog";
+import { toast } from "@/components/ui/toast"
 
 type BorrowBookProps = {
   bookId: string;
@@ -23,20 +24,17 @@ export default function BorrowBook({
 }: BorrowBookProps) {
   const { data: session } = authClient.useSession();
   const user = session?.user;
-
   const [isBorrowing, setIsBorrowing] = useState(false);
   const [message, setMessage] = useState("");
-
   const canBorrow = stock > 0 && !isBorrowing;
-
   const handleBorrow = async (): Promise<boolean> => {
+
     if (isBorrowing || stock <= 0) return false;
 
     if (!user) {
       setMessage("Please sign in to borrow this book.");
       return false;
     }
-
     setMessage("");
     setIsBorrowing(true);
 
@@ -50,6 +48,7 @@ export default function BorrowBook({
           bookId,
           bookTitle,
           bookImage,
+          userEmail: user.email,
           userName: user.name,
           quantity: 1,
         }),
@@ -58,10 +57,20 @@ export default function BorrowBook({
       const data = await res.json();
 
       if (!res.ok) {
-        throw new Error(data.message || "Could not borrow this book.");
+        setMessage(data.message || "Could not borrow this book.");
+        toast.add({
+          title: "Error",
+          type: "error",
+          description: data.message || "Could not borrow this book.",
+        });
+        return false;
       }
-
       setMessage("Book borrowed successfully!");
+      toast.add({
+        title: "Success",
+        type: "success",
+        description: data.message || "Book borrowed successfully!",
+      });
       onBorrowed?.();
       return true;
     } catch (error) {

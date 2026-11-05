@@ -19,6 +19,7 @@ import { Input } from "@/components/ui/input"
 import { authClient } from "@/lib/auth-client";
 import Link from "next/link"
 import { redirect } from "next/navigation";
+import { toast } from "@/components/ui/toast"
 
 export default function LoginPage() {
 
@@ -34,10 +35,20 @@ export default function LoginPage() {
             })
     
             if (data){
+                toast.add({
+                    title: "Success",
+                    type: "success",
+                    description: "Login successful!",
+                });
                 redirect("/")
             }
             if (error){
                 console.error(error);
+                toast.add({
+                    title: "Error",
+                    type: "error",
+                    description: error.message || "Login failed.",
+                });
             }
         }
 
