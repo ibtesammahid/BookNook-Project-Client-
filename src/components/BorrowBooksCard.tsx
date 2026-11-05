@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import BorrowBookDialog from "@/components/BorrowBookDialog";
+import Link from "next/link";
 
 export type BorrowedBook = {
   _id: string;
@@ -26,7 +27,7 @@ const BorrowBooksCard = ({ books }: BorrowBooksCardProps) => {
       <section className="w-full rounded-xl border border-gray-200 bg-white px-6 py-12 text-center shadow-sm">
         <h2 className="text-lg font-bold text-[#1F3864]">My Borrows</h2>
         <p className="mt-2 text-sm text-gray-500">
-          You haven’t borrowed any books yet.
+          You haven@apos;t borrowed any books yet.
         </p>
       </section>
     );
@@ -64,9 +65,11 @@ const BorrowBooksCard = ({ books }: BorrowBooksCardProps) => {
 
           {/* Book details */}
           <div className="min-w-0 flex-1">
+            <Link key={book._id} href={`/books/${book._id}`} className="hover:underline">
             <h3 className="text-lg font-bold text-[#1F3864]">
               {book.bookTitle}
-            </h3>
+            </h3> 
+            </Link>
 
             <div className="mt-3 grid grid-cols-1 gap-2 text-sm sm:grid-cols-2">
               <p className="text-gray-600">

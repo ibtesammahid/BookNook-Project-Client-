@@ -38,7 +38,7 @@ const CATEGORY_LINKS = ["Fiction", "Non-Fiction", "Education", "Kids", "Self Hel
 
 const CONTACTS = [
   { icon: Mail, text: "support@booknook.com"},
-  { icon: PhoneCall, text: "+880 14016006653"},
+  { icon: PhoneCall, text: "123-456-7890"},
   { icon: MapPin, text: "Uttar Badda, Dhaka 1212", href: "#" },
 ];
 

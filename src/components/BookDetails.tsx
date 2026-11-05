@@ -39,6 +39,9 @@ async function fetchBook(id: string): Promise<Book | null> {
   }
 
   const data: ApiBook = await res.json();
+  if (!data) {
+  return null;
+}
 
   return {
     id: data._id,
