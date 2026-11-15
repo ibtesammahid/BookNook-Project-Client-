@@ -1,4 +1,4 @@
-const API_BASE = "http://localhost:5000";
+const API_BASE = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
 const TOKEN_ENDPOINT = "/api/auth/token";
 const EXPIRY_BUFFER_MS = 30_000;
 const FALLBACK_TTL_MS = 10 * 60_000;
