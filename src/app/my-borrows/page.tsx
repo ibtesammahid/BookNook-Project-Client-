@@ -13,7 +13,7 @@ const MyBorrowsPage = async () => {
   });
 
   const res = await fetch(
-    `http://localhost:5000/my-borrows/${encodeURIComponent(user?.email ?? "")}`,
+    `${process.env.NEXT_PUBLIC_API_URL}/my-borrows/${encodeURIComponent(user?.email ?? "")}`,
     {
       headers: jwtToken?.token
         ? { Authorization: `Bearer ${jwtToken.token}` }
@@ -24,7 +24,7 @@ const MyBorrowsPage = async () => {
   console.log(borrowedBooks);
 
   return (
-    <main className="mx-auto w-full max-w-6xl px-4 py-10 sm:px-6">
+    <main className="mx-auto w-full max-w-6xl px-4 py-10 sm:px-6" data-aos="fade-up">
       <BorrowBooksCard books={borrowedBooks} />
     </main>
   );

@@ -9,7 +9,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-
+import { toast } from "@/components/ui/toast"
 import logo from "@/assets/NavLogo/Modern Book Nook Logo.png";
 
 import {
@@ -131,30 +131,51 @@ function AccountDropdown({
   // 5.1 HANDLE SIGN OUT
   // ======================================
 
-  const handleSignOut = async () => {
-    setIsSigningOut(true);
-    setSignOutError("");
+ const handleSignOut = async () => {
+  setIsSigningOut(true);
+  setSignOutError("");
 
-    try {
-      const { error } = await authClient.signOut();
+  try {
+    const { error } = await authClient.signOut();
 
-      if (error) {
-        setSignOutError(error.message || "Unable to sign out.");
-        return;
-      }
+    if (error) {
+      setSignOutError(error.message || "Unable to sign out.");
 
-      // Close dropdown
-      setDropdownOpen(false);
+      toast.add({
+        title: "Sign out failed",
+        type: "error",
+        description: error.message || "Unable to sign out.",
+      });
 
-      // Navigate to homepage
-      router.replace("/");
-    } catch (error) {
-      console.error("Sign-out error:", error);
-      setSignOutError("Something went wrong. Please try again.");
-    } finally {
-      setIsSigningOut(false);
+      return;
     }
-  };
+
+    // Show success toast
+    toast.add({
+      title: "Signed out successfully",
+      type: "success",
+      description: "You have been logged out of your account.",
+    });
+
+    // Close dropdown
+    setDropdownOpen(false);
+
+    // Navigate to homepage
+    router.replace("/");
+  } catch (error) {
+    console.error("Sign-out error:", error);
+
+    toast.add({
+      title: "Something went wrong",
+      type: "error",
+      description: "Please try again.",
+    });
+
+    setSignOutError("Something went wrong. Please try again.");
+  } finally {
+    setIsSigningOut(false);
+  }
+};
 
   return (
     <div className={`relative ${className}`}>
@@ -298,7 +319,7 @@ export default function Navbar() {
       ====================================== */}
 
       <div className="border-b border-gray-100 bg-white">
-        <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:h-[72px] sm:px-6">
+        <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:h-18 sm:px-6">
 
           {/* BookNook logo */}
           <Link

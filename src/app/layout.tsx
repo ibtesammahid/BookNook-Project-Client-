@@ -5,6 +5,7 @@ import Footer from "@/components/Footer";
 import { AuthProvider } from "@/lib/auth-context";
 import "./globals.css";
 import { Toaster } from "@/components/ui/toast"
+import AOSProvider from "@/components/AOSProvider";
 
 
 
@@ -26,6 +27,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     >
       <body className="min-h-full flex flex-col">
         <AuthProvider>
+        <AOSProvider />
           <Navbar />
           <main className="flex-1">{children}</main>
           <Footer />

@@ -44,7 +44,7 @@ const FAQ = () => {
     };
 
     return (
-        <section aria-label="Frequently asked questions" className="bg-[#F7F4EF] py-16">
+        <section aria-label="Frequently asked questions" className="bg-[#F7F4EF] py-16" data-aos="fade-up">
             <div className="mx-auto grid max-w-7xl items-start gap-10 px-6 lg:grid-cols-2 lg:gap-16">
                 {/* Left column — heading + contact info */}
                 <div>

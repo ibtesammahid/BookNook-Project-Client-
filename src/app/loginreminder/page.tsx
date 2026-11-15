@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function LoginReminder() {
   return (
-    <main className="flex min-h-[60vh] items-center justify-center px-4">
+    <main className="flex min-h-[60vh] items-center justify-center px-4" data-aos="fade-up">
       <div className="w-full max-w-md rounded-xl border bg-white p-8 text-center shadow-sm">
         <h2 className="text-xl font-bold text-[#1F3864]">
           Please sign in to access this page

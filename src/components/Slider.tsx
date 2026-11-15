@@ -79,6 +79,7 @@ export default function Slider() {
 
   return (
     <section
+      data-aos="fade-up"
       aria-label="Featured books"
       className="relative w-full overflow-hidden"
       onMouseEnter={() => setPaused(true)}

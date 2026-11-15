@@ -47,7 +47,7 @@ const PROMOS = [
 
 const DiscoverBooks = () => {
   return (
-    <section aria-label="Shop by categories" className="py-16">
+    <section aria-label="Shop by categories" className="py-16" data-aos="fade-up">
       {/* Section header */}
       <div className="mx-auto mb-10 max-w-7xl px-6 text-center">
         <p className="mb-4 flex items-center justify-center gap-2 text-sm font-bold uppercase tracking-wider text-[#B3372B]">

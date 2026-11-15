@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { ArrowUpRight, BookOpen } from "lucide-react";
+import { BookCardsSkeleton } from "@/components/skeletons/BooksSkeleton";
 
 /** Shape expected from the API — `cover` is provided by the API later on. */
 type Book = {
@@ -23,25 +24,9 @@ type ApiBook = {
 /** Number of books revealed per click of the Load More button. */
 const PAGE_SIZE = 9;
 
-/**
- * TODO(API): replace the body with your own API call. It must resolve to an
- * array of `Book` objects — `title` and `author` are rendered dynamically on
- * each card, and `cover` is the book's cover photo (may be null/omitted).
- *
- * Example:
- *   const res = await fetch("https://your-api.example.com/books");
- *   if (!res.ok) throw new Error("Failed to load books");
- *   const data = await res.json();
- *   return data.map((b) => ({
- *     id: b.id,
- *     title: b.title,
- *     author: b.author,
- *     cover: b.cover,
- *   }));
- */
 async function fetchBooks(): Promise<Book[]> {
   // Empty placeholder — add your API here.
-  const res = await fetch('http://localhost:5000/books');
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/books`);
 //   const data = await res.json();
 //  console.log(data);
 //   return [];
@@ -107,25 +92,14 @@ export default function AllBooks() {
   const hasMore = visibleCount < books.length;
 
   return (
-    <section aria-label="All books">
-      <div className="mx-auto max-w-7xl px-6">
+    <section aria-label="All books" className="py-16">
+      <div className="mx-auto max-w-7xl px-6" >
         <div
           role="list"
           className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3"
         >
-          {/* Loading skeletons */}
-          {loading &&
-            Array.from({ length: PAGE_SIZE }, (_, i) => (
-              <div
-                key={`skeleton-${i}`}
-                aria-hidden="true"
-                className="animate-pulse rounded-2xl bg-gray-100 p-4"
-              >
-                <div className="aspect-3/4 rounded-lg bg-gray-200" />
-                <div className="mt-4 h-4 w-3/4 rounded bg-gray-200" />
-                <div className="mt-2 h-3 w-1/3 rounded bg-gray-200" />
-              </div>
-            ))}
+          {/* Loading skeletons — same cards the loading page shows */}
+          {loading && <BookCardsSkeleton />}
 
           {/* Error state */}
           {!loading && error && (

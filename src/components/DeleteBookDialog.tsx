@@ -56,7 +56,7 @@ const DeleteBookDialog = ({ id, onDeleted }: DeleteBookDialogProps) => {
   };
 
   return (
-    <AlertDialog open={open} onOpenChange={setOpen}>
+    <AlertDialog open={open} onOpenChange={setOpen} data-aos="zoom-in">
       <AlertDialogTrigger
         render={
           <Button className="mt-4 inline-flex w-fit items-center gap-1 rounded-md bg-[#B3372B] px-4 py-2 text-sm font-semibold text-white transition-opacity hover:opacity-90">

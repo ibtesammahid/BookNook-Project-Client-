@@ -42,7 +42,7 @@ export default function BorrowDialog({
   };
 
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
+    <Dialog open={open} onOpenChange={setOpen} data-aos="zoom-in">
       <DialogTrigger
         render={
           <Button

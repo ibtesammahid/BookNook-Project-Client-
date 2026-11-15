@@ -5,6 +5,7 @@ import { authClient } from "@/lib/auth-client";
 import { apiFetch } from "@/lib/api";
 import MyBooksCard from "@/components/MyBooksCard";
 import type { AddedBook } from "@/components/MyBooksCard";
+import MyBooksSkeleton from "@/components/skeletons/MyBooksSkeleton";
 
 export default function MyBooksPage() {
   const { data: session, isPending } = authClient.useSession();
@@ -39,7 +40,13 @@ export default function MyBooksPage() {
   getMyBooks();
 }, [email]);
 
-  if (isPending || loading) return <p>Loading your books...</p>;
+  if (isPending || loading) {
+    return (
+      <main className="mx-auto w-full max-w-6xl px-4 py-10 sm:px-6">
+        <MyBooksSkeleton />
+      </main>
+    );
+  }
   if (!session?.user) return <p>Please sign in to view your books.</p>;
 
   const handleBookDeleted = (id: string) => {
@@ -49,7 +56,7 @@ export default function MyBooksPage() {
 };
 
   return (
-    <main className="mx-auto w-full max-w-6xl px-4 py-10 sm:px-6">
+    <main className="mx-auto w-full max-w-6xl px-4 py-10 sm:px-6" data-aos="fade-up">
       <MyBooksCard books={books} onBookDeleted={handleBookDeleted} />
     </main>
   );

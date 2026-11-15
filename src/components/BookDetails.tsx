@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import { ArrowRight } from "lucide-react";
 import BorrowBook from "./BorrowBook";
+import BookDetailsSkeleton from "@/components/skeletons/BookDetailsSkeleton";
 
 /** Book shape used by this page. */
 type Book = {
@@ -16,6 +17,7 @@ type Book = {
   category?: string;
   userName?: string;
   stock: number;
+  createdAt?: string;
 };
 
 type ApiBook = {
@@ -27,10 +29,11 @@ type ApiBook = {
   userName?: string;
   totalCopies: number;
   image?: string | null;
+  createdAt?: string;
 };
 
 async function fetchBook(id: string): Promise<Book | null> {
-  const res = await fetch(`http://localhost:5000/books/${id}`);
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/books/${id}`);
 
   if (res.status === 404) return null;
 
@@ -40,8 +43,8 @@ async function fetchBook(id: string): Promise<Book | null> {
 
   const data: ApiBook = await res.json();
   if (!data) {
-  return null;
-}
+    return null;
+  }
 
   return {
     id: data._id,
@@ -52,6 +55,7 @@ async function fetchBook(id: string): Promise<Book | null> {
     category: data.category,
     userName: data.userName,
     stock: Number(data.totalCopies),
+    createdAt: data.createdAt,
   };
 }
 
@@ -102,14 +106,7 @@ export default function BookDetails({ id }: { id: string }) {
   );
 
   if (loading) {
-    return (
-      <div className="mx-auto max-w-3xl animate-pulse px-6 py-12">
-        <div className="h-4 w-64 rounded bg-gray-200" />
-        <div className="mt-10 h-9 w-3/4 rounded bg-gray-200" />
-        <div className="mt-3 h-4 w-40 rounded bg-gray-200" />
-        <div className="mt-8 h-px w-full bg-gray-200" />
-      </div>
-    );
+    return <BookDetailsSkeleton />;
   }
 
   if (error || !book) {
@@ -133,7 +130,7 @@ export default function BookDetails({ id }: { id: string }) {
   }
 
   return (
-    <div className="mx-auto max-w-6xl px-6 py-12">
+    <div className="mx-auto max-w-6xl px-6 py-12" data-aos="fade-up">
       {breadcrumb}
 
       <div className="mt-8 grid grid-cols-1 gap-8 md:grid-cols-2 md:gap-12">
@@ -189,6 +186,18 @@ export default function BookDetails({ id }: { id: string }) {
             <p className="text-sm">
               <span className="font-bold text-[#1F3864]">Added by:</span>{" "}
               <span className="text-gray-600">{book.userName}</span>
+            </p>
+          )}
+          {book.createdAt && (
+            <p className="text-sm">
+              <span className="font-bold text-[#1F3864]">Added on:</span>{" "}
+              <span className="text-gray-600">
+                {new Date(book.createdAt).toLocaleDateString("en-GB", {
+                  day: "numeric",
+                  month: "long",
+                  year: "numeric",
+                })}
+              </span>
             </p>
           )}
         </div>

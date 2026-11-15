@@ -225,7 +225,7 @@ export default function AddBookForm() {
 
 
   return (
-    <div className="mx-auto max-w-3xl px-6">
+    <div className="mx-auto max-w-3xl px-6" data-aos="fade-up">
       <Card className="rounded-2xl bg-[#F5F5F3] shadow-none ring-0">
         <CardHeader>
           <CardTitle className="text-lg font-bold text-[#1F3864]">

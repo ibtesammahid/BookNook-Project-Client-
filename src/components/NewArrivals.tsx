@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { ArrowRight, BookOpen, ChevronLeft, ChevronRight, Library, Plus } from "lucide-react";
+import { NewArrivalCardsSkeleton } from "@/components/skeletons/NewArrivalsSkeleton";
 
 type Book = {
   _id: string;
@@ -14,7 +15,7 @@ type Book = {
 };
 
 async function fetchNewArrivals(): Promise<Book[]> {
-  const res = await fetch("http://localhost:5000/new-arrivals");
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/new-arrivals`);
 
   if (!res.ok) {
     throw new Error("Failed to fetch new arrivals");
@@ -75,7 +76,7 @@ export default function NewArrivals() {
   }, []);
 
   return (
-    <section aria-label="New arrivals" className="py-16">
+    <section aria-label="New arrivals" className="py-16" data-aos="fade-up">
       {/* Section header */}
       <div className="mx-auto mb-10 max-w-7xl px-6 text-center">
         <p className="mb-4 flex items-center justify-center gap-2 text-sm font-bold uppercase tracking-wider text-[#B3372B]">
@@ -97,14 +98,7 @@ export default function NewArrivals() {
           className="flex snap-x gap-5 overflow-x-auto px-6 pb-4"
         >
         {/* Loading skeletons — 4 cards while the API responds */}
-        {loading &&
-          Array.from({ length: 4 }, (_, i) => (
-            <div
-              key={`skeleton-${i}`}
-              aria-hidden="true"
-              className={`aspect-3/4 shrink-0 animate-pulse rounded-2xl bg-gray-100 ${CARD_WIDTHS}`}
-            />
-          ))}
+        {loading && <NewArrivalCardsSkeleton />}
 
         {books.map((book) => (
           <article

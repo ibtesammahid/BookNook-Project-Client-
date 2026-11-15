@@ -35,7 +35,7 @@ const BorrowBooksCard = ({ books }: BorrowBooksCardProps) => {
 
 
   return (
-    <section className="w-full space-y-4">
+    <section className="w-full space-y-4" data-aos="fade-up">
       <div>
         <h2 className="text-lg font-bold text-[#1F3864] sm:text-xl">
           My Borrows

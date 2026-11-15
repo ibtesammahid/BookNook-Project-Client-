@@ -234,7 +234,7 @@ const EditBookDialog = ({ book }: { book: EditBookProps }) => {
   };
 
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
+    <Dialog open={open} onOpenChange={setOpen} data-aos="zoom-in">
       <DialogTrigger>
         <Button
           className="mt-4 inline-flex w-fit items-center gap-1 rounded-md border-2  border-[#B3372B] text-[#B3372B] px-4 py-2 text-sm font-semibold transition-opacity hover:opacity-90"

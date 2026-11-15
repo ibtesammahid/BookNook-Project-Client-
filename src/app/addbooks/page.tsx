@@ -3,7 +3,7 @@ import AddBookForm from "@/components/AddBookForm";
 
 export default function AddBooksPage() {
   return (
-    <section className="py-16">
+    <section className="py-16" data-aos="fade-up">
       {/* Section header */}
       <div className="mx-auto mb-10 max-w-7xl px-6 text-center">
         <p className="mb-4 flex items-center justify-center gap-2 text-sm font-bold uppercase tracking-wider text-[#B3372B]">

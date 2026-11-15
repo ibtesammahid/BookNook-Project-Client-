@@ -45,7 +45,7 @@ export default function RegisterPage() {
                 title: "Error",
                 type: "error",
                 description: error.message || "Registration failed.",
-            });
+            });  
         }
     }
 
@@ -66,7 +66,7 @@ export default function RegisterPage() {
       };
 
   return (
-    <div className="flex flex-col gap-6">
+    <div className="flex flex-col gap-6" data-aos="fade-up">
       <Card className="border shadow-sm ring-0">
         <CardHeader className="text-center">
           <CardTitle className="text-xl font-bold text-[#1F3864]">

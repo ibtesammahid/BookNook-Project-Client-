@@ -59,7 +59,7 @@ export default function Footer() {
                 className="h-10 w-auto brightness-0 invert"
               />
             </Link>
-            <p className="mt-5 max-w-[300px] text-sm leading-6 text-white/80">
+            <p className="mt-5 max-w-75 text-sm leading-6 text-white/80">
               Our bookstore brings together timeless classics, bestselling titles.
             </p>
             <div className="mt-6 flex gap-3">
