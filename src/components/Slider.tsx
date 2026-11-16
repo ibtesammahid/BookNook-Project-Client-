@@ -2,8 +2,12 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ArrowUpRight, ChevronLeft, ChevronRight, Library } from "lucide-react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay } from "swiper/modules";
+import type { Swiper as SwiperInstance } from "swiper";
+import "swiper/css";
 import bannerBhautik from "@/assets/banner/bhautik-patel-DWkI7bCokDU-unsplash.jpg";
 import bannerLibrary from "@/assets/banner/books-in-the-library-ai-generated-photo.jpg";
 import bannerJessica from "@/assets/banner/jessica-ruscello-OQSCtabGkSY-unsplash.jpg";
@@ -56,104 +60,102 @@ const SLIDES = [
 ];
 
 const AUTOPLAY_MS = 10000;
-const SWIPE_THRESHOLD_PX = 50;
 
 export default function Slider() {
+  const swiperRef = useRef<SwiperInstance | null>(null);
   const [index, setIndex] = useState(0);
-  const [paused, setPaused] = useState(false);
-  const touchStartX = useRef<number | null>(null);
-  const count = SLIDES.length;
 
-  const goTo = useCallback(
-    (next: number) => setIndex(((next % count) + count) % count),
-    [count],
-  );
-
-  // Autoplay: skipped while paused (hover) or when the user prefers reduced motion.
+  // Autoplay respects prefers-reduced-motion (pause on hover is built in).
   useEffect(() => {
-    if (paused) return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const id = window.setInterval(() => setIndex((i) => (i + 1) % count), AUTOPLAY_MS);
-    return () => window.clearInterval(id);
-  }, [paused, count]);
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      swiperRef.current?.autoplay?.stop();
+    }
+  }, []);
 
   return (
     <section
       data-aos="fade-up"
       aria-label="Featured books"
       className="relative w-full overflow-hidden"
-      onMouseEnter={() => setPaused(true)}
-      onMouseLeave={() => setPaused(false)}
     >
-      {/* Sliding track */}
-      <div
-        className="flex transition-transform duration-700 ease-out"
-        style={{ transform: `translateX(-${index * 100}%)` }}
-        onTouchStart={(e) => {
-          touchStartX.current = e.touches[0].clientX;
+      <Swiper
+        modules={[Autoplay]}
+        loop
+        speed={700}
+        autoplay={{
+          delay: AUTOPLAY_MS,
+          pauseOnMouseEnter: true,
+          disableOnInteraction: false,
         }}
-        onTouchEnd={(e) => {
-          if (touchStartX.current === null) return;
-          const delta = e.changedTouches[0].clientX - touchStartX.current;
-          if (Math.abs(delta) > SWIPE_THRESHOLD_PX) {
-            goTo(index + (delta < 0 ? 1 : -1));
-          }
-          touchStartX.current = null;
+        onSwiper={(swiper) => {
+          swiperRef.current = swiper;
         }}
+        onSlideChange={(swiper) => setIndex(swiper.realIndex)}
+        className="w-full"
       >
         {SLIDES.map((slide, i) => (
-          <article
-            key={i}
-            className="relative h-[calc(100dvh-4rem)] w-full shrink-0 sm:h-[calc(100dvh-4.5rem)] md:h-[calc(100dvh-7.5rem)]"
-          >
-            {/* Background photo */}
-            <Image
-              src={slide.src}
-              alt=""
-              fill
-              priority={i === 0}
-              sizes="100vw"
-              className="object-cover object-center"
-            />
-            {/* Light overlay so the copy stays readable over any photo */}
-            <div className="absolute inset-0 bg-linear-to-r from-[#EDEBE6] via-[#EDEBE6]/90 to-[#EDEBE6]/20 md:via-[#EDEBE6]/80 md:to-transparent" />
+          <SwiperSlide key={i}>
+            <article className="relative h-[calc(100dvh-4rem)] w-full sm:h-[calc(100dvh-4.5rem)] md:h-[calc(100dvh-7.5rem)]">
+              {/* Background photo */}
+              <Image
+                src={slide.src}
+                alt=""
+                fill
+                priority={i === 0}
+                sizes="100vw"
+                className="object-cover object-center"
+              />
+              {/* Light overlay so the copy stays readable over any photo */}
+              <div className="absolute inset-0 bg-linear-to-r from-[#EDEBE6] via-[#EDEBE6]/90 to-[#EDEBE6]/20 md:via-[#EDEBE6]/80 md:to-transparent" />
 
-            {/* Copy — matches the reference banner */}
-            <div className="relative z-10 mx-auto flex h-full max-w-7xl items-center px-6">
-              <div className="max-w-xl py-16">
-                <p
-                  className="mb-4 flex items-center gap-2 text-sm font-bold uppercase tracking-wider"
-                  style={{ color: ACCENT }}
-                >
-                  <Library className="h-5 w-5" />
-                  Read better every day
-                </p>
-                <h1
-                  className="mb-5 text-4xl font-bold leading-tight sm:text-5xl lg:text-6xl"
-                  style={{ color: HEADING }}
-                >
-                  {slide.headline}
-                </h1>
-                <p className="mb-8 text-base text-gray-600 sm:text-lg">{slide.sub}</p>
-                <Link
-                  href="/books"
-                  className="inline-flex items-center gap-2 rounded-md px-6 py-3 text-sm font-semibold text-white transition-opacity hover:opacity-90"
-                  style={{ backgroundColor: ACCENT }}
-                >
-                  Browse Books
-                  <ArrowUpRight className="h-4 w-4" />
-                </Link>
+              {/* Copy — matches the reference banner */}
+              <div className="relative z-10 mx-auto flex h-full max-w-7xl items-center px-6">
+                <div className="max-w-xl py-16">
+                  <p
+                    className="mb-4 flex items-center gap-2 text-sm font-bold uppercase tracking-wider"
+                    style={{ color: ACCENT }}
+                  >
+                    <Library className="h-5 w-5" />
+                    Read better every day
+                  </p>
+                  {i === 0 ? (
+                    <h1
+                      className="mb-5 text-4xl font-bold leading-tight sm:text-5xl lg:text-6xl"
+                      style={{ color: HEADING }}
+                    >
+                      {slide.headline}
+                    </h1>
+                  ) : (
+                    <h2
+                      className="mb-5 text-4xl font-bold leading-tight sm:text-5xl lg:text-6xl"
+                      style={{ color: HEADING }}
+                    >
+                      {slide.headline}
+                    </h2>
+                  )}
+                  <p className="mb-8 text-base text-gray-600 sm:text-lg">
+                    {slide.sub}
+                  </p>
+                  <Link
+                    href="/books"
+                    className="inline-flex items-center gap-2 rounded-md px-6 py-3 text-sm font-semibold text-white transition-opacity hover:opacity-90"
+                    style={{ backgroundColor: ACCENT }}
+                  >
+                    Browse Books
+                    <ArrowUpRight className="h-4 w-4" />
+                  </Link>
+                </div>
               </div>
-            </div>
-          </article>
+            </article>
+          </SwiperSlide>
         ))}
-      </div>
+      </Swiper>
 
       {/* Arrows (desktop) */}
       <button
         type="button"
         aria-label="Previous slide"
-        onClick={() => goTo(index - 1)}
+        onClick={() => swiperRef.current?.slidePrev()}
         className="absolute left-4 top-1/2 z-20 hidden -translate-y-1/2 cursor-pointer rounded-full bg-white/80 p-3 text-[#1F3864] shadow-md transition-colors hover:bg-white md:block"
       >
         <ChevronLeft className="h-5 w-5" />
@@ -161,7 +163,7 @@ export default function Slider() {
       <button
         type="button"
         aria-label="Next slide"
-        onClick={() => goTo(index + 1)}
+        onClick={() => swiperRef.current?.slideNext()}
         className="absolute right-4 top-1/2 z-20 hidden -translate-y-1/2 cursor-pointer rounded-full bg-white/80 p-3 text-[#1F3864] shadow-md transition-colors hover:bg-white md:block"
       >
         <ChevronRight className="h-5 w-5" />
@@ -175,7 +177,7 @@ export default function Slider() {
             type="button"
             aria-label={`Go to slide ${i + 1}`}
             aria-current={i === index}
-            onClick={() => goTo(i)}
+            onClick={() => swiperRef.current?.slideToLoop(i)}
             className={`h-2 cursor-pointer rounded-full transition-all ${
               i === index ? "w-6" : "w-2 bg-black/20 hover:bg-black/40"
             }`}
