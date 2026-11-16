@@ -1,5 +1,10 @@
 import { Library } from "lucide-react";
 import AllBooks from "@/components/AllBooks";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "All Books",
+};
 
 export default function AllBooksPage() {
   return (

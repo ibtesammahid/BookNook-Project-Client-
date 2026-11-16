@@ -1,3 +1,9 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Recently Added",
+};
+
 export default function RecentlyAddedPage() {
   return (
     <section className="mx-auto max-w-7xl px-6 py-16" data-aos="fade-up">

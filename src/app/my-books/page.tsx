@@ -43,11 +43,18 @@ export default function MyBooksPage() {
   if (isPending || loading) {
     return (
       <main className="mx-auto w-full max-w-6xl px-4 py-10 sm:px-6">
+        <title>BookNook | My Books</title>
         <MyBooksSkeleton />
       </main>
     );
   }
-  if (!session?.user) return <p>Please sign in to view your books.</p>;
+  if (!session?.user)
+    return (
+      <>
+        <title>BookNook | My Books</title>
+        <p>Please sign in to view your books.</p>
+      </>
+    );
 
   const handleBookDeleted = (id: string) => {
   setBooks((currentBooks) =>
@@ -57,6 +64,7 @@ export default function MyBooksPage() {
 
   return (
     <main className="mx-auto w-full max-w-6xl px-4 py-10 sm:px-6" data-aos="fade-up">
+      <title>BookNook | My Books</title>
       <MyBooksCard books={books} onBookDeleted={handleBookDeleted} />
     </main>
   );

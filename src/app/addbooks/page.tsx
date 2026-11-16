@@ -1,5 +1,10 @@
 import { Library } from "lucide-react";
 import AddBookForm from "@/components/AddBookForm";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Add Book",
+};
 
 export default function AddBooksPage() {
   return (

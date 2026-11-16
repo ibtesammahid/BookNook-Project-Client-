@@ -3,7 +3,7 @@ import { BookOpen, Home } from "lucide-react";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Page Not Found - BookNook",
+  title: "Page Not Found",
   description: "The page you are looking for does not exist.",
 };
 

@@ -1,6 +1,11 @@
 import { Suspense } from "react";
 import BookDetails from "@/components/BookDetails";
 import BookDetailsSkeleton from "@/components/skeletons/BookDetailsSkeleton";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Book Details",
+};
 
 type PageProps = { params: Promise<{ id: string }> };
 

@@ -2,6 +2,11 @@ import BorrowBooksCard from "@/components/BorrowBooksCard";
 import type { BorrowedBook } from "@/components/BorrowBooksCard";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "My Borrows",
+};
 
 const MyBorrowsPage = async () => {
   const session = await auth.api.getSession({
