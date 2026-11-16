@@ -56,7 +56,6 @@ export default function RegisterPage() {
         });
     
         if (error) {
-          alert(error.message ?? "Sign In failed");
           toast.add({
             title: "Error",
             type: "error",
@@ -67,6 +66,7 @@ export default function RegisterPage() {
 
   return (
     <div className="flex flex-col gap-6" data-aos="fade-up">
+      <title>BookNook | Register</title>
       <Card className="border shadow-sm ring-0">
         <CardHeader className="text-center">
           <CardTitle className="text-xl font-bold text-[#1F3864]">

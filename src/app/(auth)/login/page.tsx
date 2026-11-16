@@ -59,12 +59,17 @@ export default function LoginPage() {
     });
 
     if (error) {
-      alert(error.message ?? "Sign In failed");
+      toast.add({
+        title: "Error",
+        type: "error",
+        description: error.message || "Sign In failed.",
+      });
     }
   };
 
   return (
     <div className="flex flex-col gap-6" data-aos="fade-up">
+      <title>BookNook | Login</title>
       <Card className="border shadow-sm ring-0">
         <CardHeader className="text-center">
           <CardTitle className="text-xl font-bold text-[#1F3864]">
