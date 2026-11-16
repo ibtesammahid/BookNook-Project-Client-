@@ -21,7 +21,12 @@ async function fetchNewArrivals(): Promise<Book[]> {
     throw new Error("Failed to fetch new arrivals");
   }
 
-  return res.json();
+  const data: unknown = await res.json();
+  if (!Array.isArray(data)) {
+    throw new Error("Invalid new arrivals data received from server");
+  }
+
+  return data as Book[];
 }
 
 const CARD_WIDTHS =

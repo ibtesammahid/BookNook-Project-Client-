@@ -27,7 +27,7 @@ const BorrowBooksCard = ({ books }: BorrowBooksCardProps) => {
       <section className="w-full rounded-xl border border-gray-200 bg-white px-6 py-12 text-center shadow-sm">
         <h2 className="text-lg font-bold text-[#1F3864]">My Borrows</h2>
         <p className="mt-2 text-sm text-gray-500">
-          You haven@apos;t borrowed any books yet.
+          You haven&apos;t borrowed any books yet.
         </p>
       </section>
     );
